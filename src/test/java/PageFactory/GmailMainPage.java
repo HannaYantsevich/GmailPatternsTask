@@ -1,11 +1,17 @@
 package PageFactory;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.log4testng.Logger;
 
 public class GmailMainPage extends AbstractedPage {
+
+	private Logger log = Logger.getLogger(GmailMainPage.class);
 
 	@FindBy(xpath = "//div[contains(text(),'Compose')]")
 	private WebElement composeButton;
@@ -31,7 +37,7 @@ public class GmailMainPage extends AbstractedPage {
 	@FindBy(xpath = "//div[text()='Send']")
 	private WebElement sendButton;
 
-	@FindBy(xpath = "//a[@href='https://mail.google.com/mail/#sent']")
+	@FindBy(xpath = "//div[text()='Send']")
 	private WebElement sentButton;
 
 	@FindBy(xpath = "//a[contains(text(), 'Drafts')]")
@@ -60,7 +66,6 @@ public class GmailMainPage extends AbstractedPage {
 
 	public void subjectInput(String subjectquery) {
 		subjectInput.sendKeys(subjectquery);
-		;
 	}
 
 	public void bodyInput(String bodyquery) {
@@ -77,6 +82,20 @@ public class GmailMainPage extends AbstractedPage {
 
 	public void draftButton1() {
 		draftButton1.click();
+	}
+
+	public GmailMainPage clickOnDraftEmail() {
+		List<WebElement> draftSubjectElements = driver
+				.findElements(By.xpath(String.format("//span[contains(text(), 'Test')]")));
+		for (int i = 0; i < draftSubjectElements.size(); i++) {
+			try {
+				draftSubjectElements.get(i).click();
+			} catch (WebDriverException e) {
+				log.info(e.getCause());
+			}
+			draftSubjectElements = driver.findElements(By.xpath(String.format("//*[contains(text(), 'Test')]")));
+		}
+		return this;
 	}
 
 	public void sendButton() {

@@ -15,7 +15,7 @@ public class GmailMainPage extends AbstractedPage {
 	private static final By BODY_RESULT_LOCATOR = By.xpath("//div[text()='Hello, World!']");
 	private static final By SUBJECT_RESULT_LOCATOR = By.xpath("//div[text()='Test']");
 	private static final By SEND_BUTTON_LOCATOR = By.xpath("//div[text()='Send']");
-	private static final By SENT_MAIL_BUTTON_LOCATOR = By.xpath("//a[@href='https://mail.google.com/mail/#sent']");
+	private static final By SENT_MAIL_BUTTON_LOCATOR = By.xpath("//*[@title='Sent']");
 	private static final By DRAFTS_BUTTON_LOCATOR = By.xpath("//a[contains(text(), 'Drafts')]");
 	private static final By NO_DRAFTS_LOCATOR = By.xpath("//tr[@class='TD']/td[@class='TC']");
 	private static final By IMAGE_BUTTON_LOCATOR = By.xpath(

@@ -31,13 +31,10 @@ public class GmailMainPage extends AbstractedPage {
 	@FindBy(xpath = "//a[contains(text(), 'Drafts')]")
 	private WebElement draftButton;
 
-	@FindBy(id = ":9a")
-	private WebElement draftButton1;
-
 	@FindBy(xpath = "//div[text()='Send']")
 	private WebElement sendButton;
 
-	@FindBy(xpath = "//div[text()='Send']")
+	@FindBy(xpath = "//*[@title='Sent']")
 	private WebElement sentButton;
 
 	@FindBy(xpath = "//a[contains(text(), 'Drafts')]")
@@ -80,22 +77,11 @@ public class GmailMainPage extends AbstractedPage {
 		draftButton.click();
 	}
 
-	public void draftButton1() {
-		draftButton1.click();
-	}
-
 	public GmailMainPage clickOnDraftEmail() {
-		List<WebElement> draftSubjectElements = driver
-				.findElements(By.xpath(String.format("//span[contains(text(), 'Test')]")));
-		for (int i = 0; i < draftSubjectElements.size(); i++) {
-			try {
-				draftSubjectElements.get(i).click();
-			} catch (WebDriverException e) {
-				log.info(e.getCause());
-			}
-			draftSubjectElements = driver.findElements(By.xpath(String.format("//*[contains(text(), 'Test')]")));
-		}
+		driver.findElements(By.xpath(String.format("//span[contains(text(), 'Test')]"))).stream()
+				.filter(draftItem -> draftItem.isDisplayed()).findFirst().get().click();
 		return this;
+
 	}
 
 	public void sendButton() {

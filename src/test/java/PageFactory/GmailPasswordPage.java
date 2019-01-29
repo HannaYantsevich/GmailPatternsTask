@@ -14,7 +14,7 @@ public class GmailPasswordPage extends AbstractedPage {
 	@FindBy(xpath = "//div[@class='Xb9hP']/input[@type='password']")
 	private WebElement passwordInput;
 
-	@FindBy(id = "passwordNext")
+	@FindBy(xpath = "//*[@id='passwordNext']")
 	private WebElement nextButton;
 
 	public void fillGmailPasswordInput(String query) {

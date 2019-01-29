@@ -2,19 +2,12 @@ package PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
+import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import Patterns.GmailLoginPage;
-import Patterns.GmailMainPage;
-import Patterns.GmailPasswordPage;
 
 public class GmailTest {
 
@@ -32,8 +25,6 @@ public class GmailTest {
 	@Test
 	public void GmailTest() throws InterruptedException {
 
-		driver.get("https://www.google.com/gmail/about/#");
-
 		GmailLoginPage gmailloginpage = new GmailLoginPage(driver);
 		gmailloginpage.open();
 		gmailloginpage.pressSigninButton();
@@ -42,8 +33,9 @@ public class GmailTest {
 
 		GmailPasswordPage gmailpasswordpage = gmailloginpage.pressNextButton();
 		gmailpasswordpage.fillGmailPasswordInput("PasswordPassword");
-
+		Thread.sleep(1000);
 		GmailMainPage gmailmainpage = gmailpasswordpage.pressNextButton();
+
 		gmailmainpage.pressComposeButton();
 		gmailmainpage.recipentInput("h.yantsevich@gmail.com");
 		gmailmainpage.subjectInput("Test");
@@ -51,18 +43,15 @@ public class GmailTest {
 		gmailmainpage.saveAndCloseButton();
 		Thread.sleep(1000);
 		gmailmainpage.draftButton();
-		gmailmainpage.draftButton1();
-		gmailmainpage.subjectResult();
-		gmailmainpage.bodyResult();
+		Thread.sleep(1000);
+		gmailmainpage.clickOnDraftEmail();
 		gmailmainpage.sendButton();
 		Thread.sleep(2000);
 		gmailmainpage.sentButton();
 		Thread.sleep(2000);
 		gmailmainpage.draftsButton();
-		Thread.sleep(1000);
 		gmailmainpage.noDraftsButton();
 		gmailmainpage.imageButton();
-		Thread.sleep(1000);
 		gmailmainpage.signOutButton();
 
 	}

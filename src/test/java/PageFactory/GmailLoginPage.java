@@ -4,20 +4,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.testng.log4testng.Logger;
+
 
 public class GmailLoginPage extends AbstractedPage {
+	 private Logger log = Logger.getLogger(GmailLoginPage.class);
+	 
 	private static final String URL = "https://www.google.com/gmail/about/#";
-
+	
+	
 	public GmailLoginPage(WebDriver driver) {
 		super(driver);
-
 	}
 
 	@FindBy(xpath = "//div[@class='gmail-nav__nav-links-wrap']/a[@class ='gmail-nav__nav-link gmail-nav__nav-link__sign-in']")
 	private WebElement signInButton;
+	
 
 	@FindBy(css = "input#identifierId.whsOnd.zHQkBf")
 	private WebElement emailInput;
@@ -29,10 +31,12 @@ public class GmailLoginPage extends AbstractedPage {
 		driver.get(URL);
 		return this;
 	}
-
-	public void pressSigninButton() {
-		signInButton.click();
-	}
+	
+	
+	public GmailLoginPage pressSigninButton() {
+        signInButton.click();
+        return this;
+    }
 
 	public void fillEmailIInput(String query) {
 		emailInput.sendKeys(query);
